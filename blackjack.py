@@ -1,4 +1,4 @@
-cartas = {
+cards = {
     chr(0x1F0A1): 11,
     chr(0x1F0A2): 2,
     chr(0x1F0A3): 3,
@@ -13,3 +13,8 @@ cartas = {
     chr(0x1F0AD): 10,
     chr(0x1F0AE): 10,
 }
+
+deck = []
+
+for card, value in cards:
+    deck.append((card, value))
