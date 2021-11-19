@@ -14,12 +14,17 @@ cards = {
     chr(0x1F0AE): 10,
 }
 
-deck = []
+
 
 def create_deck():
+    _deck = []
     i = 0
-    for card, value in cards:
-        deck.append((card, "hearts", value))
-        deck.append((card, "spades", value))
-        deck.append((card, "club", value))
-        deck.append((card, "diamonds", value))
+    for card, value in cards.items():
+        _deck.append((card, "hearts", value))
+        _deck.append((card, "spades", value))
+        _deck.append((card, "club", value))
+        _deck.append((card, "diamonds", value))
+    return _deck
+
+deck = create_deck()
+print(deck)
