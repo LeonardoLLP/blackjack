@@ -17,4 +17,7 @@ cards = {
 deck = []
 
 for card, value in cards:
-    deck.append((card, value))
+    deck.append((card, "hearts", value))
+    deck.append((card, "spades", value))
+    deck.append((card, "club", value))
+    deck.append((card, "diamonds", value))
