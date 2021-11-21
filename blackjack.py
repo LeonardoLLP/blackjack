@@ -1,4 +1,5 @@
 import random as rd
+from time import sleep
 
 cards = {
     chr(0x1F0A1): 11,
@@ -15,7 +16,6 @@ cards = {
     chr(0x1F0AD): 10,
     chr(0x1F0AE): 10,
 }
-
 
 def create_deck():
     _deck = []
@@ -76,7 +76,7 @@ p1.get_card()
 p1.get_card()
 
 dealer.get_card()
-dealer.get_card()  # TODO: Esta carta tiene que estar cubierta. El jugador puede ver la primera carta pero no la segunda.
+dealer.get_card()  # Every card can be uncovered
 
 p1.state = "on play"
 while p1.state == "on play":
@@ -84,10 +84,15 @@ while p1.state == "on play":
 
     if option == "hit":
         pass
-    if option == "see my hand":
+    elif option == "see my hand":
         pass
-    if option == "stand":
-        pass
+    elif option == "stand":
+        p1.state = "standing"
+    else:
+        print("The dealer didn't understand you.")
+        sleep(0.75)
+        print('(Type "help" to get a list of comands)')
+        sleep(0.75)
 
     if p1.get_hand_value > 21:
         p1.state = "busted"
