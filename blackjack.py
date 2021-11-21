@@ -52,3 +52,13 @@ class Player:
             points += card[2]
         return points
 
+    def get_card(self):
+        self.hand.append(deck.pop())  # No need to specify deck: always the same. Only one deck
+
+
+crupier = Player(100000)
+p1 = Player(2000)
+
+p1.get_card()
+print(deck)
+print(p1.hand)
