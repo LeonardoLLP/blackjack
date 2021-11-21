@@ -53,12 +53,31 @@ class Player:
         return points
 
     def get_card(self):
-        self.hand.append(deck.pop())  # No need to specify deck: always the same. Only one deck
+        self.hand.append(
+            deck.pop()
+        )  # No need to specify deck: always the same. Only one deck
 
     def empty_hand(self):
         self.hand = []
 
+
 # TODO: Change location of this
-crupier = Player(100000)
+dealer = Player(100000)
 p1 = Player(2000)
 
+### Start hand
+
+p1.get_card()
+p1.get_card()
+
+dealer.get_card()
+dealer.get_card()  # TODO: Esta carta tiene que estar cubierta. El jugador puede ver la primera carta pero no la segunda.
+
+option = input('Choose your action (type "help" for a list of actions): ')  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
+
+if option == "hit":
+    pass
+if option == "see my hand":
+    pass
+if option == "stand":
+    pass
