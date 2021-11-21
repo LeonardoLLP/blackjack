@@ -27,11 +27,11 @@ def create_deck():
         _deck.append((card, "club", value))
         _deck.append((card, "diamonds", value))
     # Randomize the deck
-    _randomdeck = []
+    _random_deck = []
     for i in range(len(_deck)):
         card_index = rd.randint(0, len(_deck)-1)  # Need to subtract 1 because of list indexing
-        _randomdeck.append(_deck.pop(card_index))
-    return _deck
+        _random_deck.append(_deck.pop(card_index))
+    return _random_deck
 
 deck = create_deck()
 print(deck)
