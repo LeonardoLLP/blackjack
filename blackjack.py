@@ -39,6 +39,9 @@ def create_deck():
 deck = create_deck()
 print(deck)  # TODO: Remove after tests
 
+# Obtener valor de carta
+def card_value(_card):
+    return _card[2]
 
 class Player:
     def __init__(self, money):
@@ -49,7 +52,7 @@ class Player:
     def get_hand_value(self):
         points = 0
         for card in self.hand:
-            points += card[2]
+            points += card_value(card)
         return points
 
     def get_card(self):
