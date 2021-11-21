@@ -47,6 +47,8 @@ class Player:
     def __init__(self, money):
         self.money = float(money)
 
+    state = "waiting"
+
     hand = []  # Cards in the hand
 
     def get_hand_value(self):
@@ -76,6 +78,8 @@ p1.get_card()
 dealer.get_card()
 dealer.get_card()  # TODO: Esta carta tiene que estar cubierta. El jugador puede ver la primera carta pero no la segunda.
 
+p1.state = "on play"
+
 option = input('Choose your action (type "help" for a list of actions): ')  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
 
 if option == "hit":
@@ -84,3 +88,8 @@ if option == "see my hand":
     pass
 if option == "stand":
     pass
+
+if p1.get_hand_value > 21:
+    player_state = "busted"
+elif p1.get_hand_value == 21:
+    player_state = "standing"
