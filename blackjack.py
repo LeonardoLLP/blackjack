@@ -1,3 +1,5 @@
+import random as rd
+
 cards = {
     chr(0x1F0A1): 11,
     chr(0x1F0A2): 2,
@@ -24,6 +26,11 @@ def create_deck():
         _deck.append((card, "spades", value))
         _deck.append((card, "club", value))
         _deck.append((card, "diamonds", value))
+    # Randomize the deck
+    _randomdeck = []
+    for i in range(len(_deck)):
+        card_index = rd.randint(0, len(_deck)-1)  # Need to subtract 1 because of list indexing
+        _randomdeck.append(_deck.pop(card_index))
     return _deck
 
 deck = create_deck()
