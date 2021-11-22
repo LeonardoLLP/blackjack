@@ -19,7 +19,7 @@ cards = {
 
 def create_deck(length=1):  # Length represents the number of individual decks that form the big deck.
     _deck = []
-    for i in range(length)
+    for i in range(length):
         for card, value in cards.items():
             _deck.append((card, "hearts", value))
             _deck.append((card, "spades", value))
@@ -153,8 +153,8 @@ class Dealer(Player):  # Dealer will play automatically depending on its hand
 dealer = Dealer(100000)
 p1 = Visitor(2000)
 
-### Start hand
 
+### Start hand
 p1.get_card()
 dealer.get_card()# Every card can be uncovered
 
@@ -167,4 +167,4 @@ if p1.state == "standing":
 print(p1.get_hand_value())
 print(dealer.get_hand_value())
 
-# You should be able to see the dealer hand, as it is uncovered
+# You should be able to see only ONE card from the dealer. Add property to card, to be uncovered or covered. Function property
