@@ -94,8 +94,8 @@ while p1.state == "on play":
         print('(Type "help" to get a list of comands)')
         sleep(0.75)
 
-    if p1.get_hand_value > 21:
+    if p1.get_hand_value() > 21:
         p1.state = "busted"
-    elif p1.get_hand_value == 21:
+    elif p1.get_hand_value() == 21:
         p1.state = "standing"
 
