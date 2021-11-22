@@ -98,7 +98,7 @@ class Visitor(Player):
             if option == "hit":
                 pass
             elif option == "see my hand":
-                pass
+                print(self.hand)
             elif option == "stand":
                 self.state = "standing"
             else:
@@ -109,6 +109,7 @@ class Visitor(Player):
 
             if self.get_hand_value() > 21:
                 self.state = "busted"
+                print("You went bust and lost your money. Better luck next time!")
             elif self.get_hand_value() == 21:
                 self.state = "standing"
                 print("You got 21! You stand with maximum points")
@@ -119,21 +120,28 @@ class Dealer(Player):  # Dealer will play automatically depending on its hand
         self.state = "playing"
         while self.state == "playing":
 
-            hand_value = self.get_hand_value()
+            self.hand_value = self.get_hand_value()
+            print("The dealer has {} points in his hand".format(self.hand_value))
 
-            if hand_value < 17:
+            sleep(2)
+
+            if self.hand_value < 17:
+                print("The dealer gets a card")
                 self.get_card()
             elif 17 <= hand_value <= 21:
+                print("The dealer stands with {} points".format(self.hand_value))
                 self.state = "standing"
             else:  # hand_value > 21
+                print("The dealer went bust")
                 self.state = "busted"
+            sleep(2)
 
 
 
 
 # TODO: Change location of this
-dealer = Player(100000)
-p1 = Player(2000)
+dealer = Dealer(100000)
+p1 = Visitor(2000)
 
 ### Start hand
 
@@ -148,5 +156,8 @@ print(dealer.hand)
 print(p1.hand)  # TODO: remove after tests
 print()
 
+p1.play_hand()
+dealer.play_hand()
 
-
+print(p1.get_hand_value())
+print(dealer.get_hand_value())
