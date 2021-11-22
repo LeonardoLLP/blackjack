@@ -46,6 +46,7 @@ def card_value(_card):
 class Player:
     def __init__(self, money):
         self.money = float(money)
+        self.hand = []  # Cards in the hand
 
     state = "waiting"
 
@@ -77,6 +78,10 @@ p1.get_card()
 
 dealer.get_card()
 dealer.get_card()  # Every card can be uncovered
+
+print()
+print(dealer.hand)
+print(p1.hand)  # TODO: remove after tests
 
 p1.state = "on play"
 while p1.state == "on play":
