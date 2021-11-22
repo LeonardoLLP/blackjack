@@ -57,10 +57,13 @@ class Player:
             points += card_value(card)
         return points
 
-    def get_card(self):
+    def get_card(self, see_card=False):
+        self.new_card = deck.pop()
         self.hand.append(
-            deck.pop()
-        )  # No need to specify deck: always the same. Only one deck
+            self.new_card
+        )
+        if see_card == True:
+            return self.new_card
 
     def empty_hand(self):
         self.hand = []
@@ -93,23 +96,30 @@ class Visitor(Player):
     def play_hand(self):
         self.state = "playing"
         while self.state == "playing":
-            option = input('Choose your action (type "help" for a list of actions): ')  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
+            option = input('Choose your action (type "help" for a list of actions): ').casefold()  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
 
             if option == "hit":
-                pass
+                print("You get a card")
+                sleep(1)
+                print(self.get_card(see_card=True))
+                sleep(2)
+                print("Your hand is now")
+                print(self.hand)
             elif option == "see my hand":
+                print("Your hand is")
                 print(self.hand)
             elif option == "stand":
                 self.state = "standing"
+                print()
             else:
                 print("The dealer didn't understand you.")
-                sleep(0.75)
+                sleep(2)
                 print('(Type "help" to get a list of comands)')
-                sleep(0.75)
+            sleep(2)
 
             if self.get_hand_value() > 21:
                 self.state = "busted"
-                print("You went bust and lost your money. Better luck next time!")
+                print("You went bust (over 21) and lost your money. Better luck next time!")
             elif self.get_hand_value() == 21:
                 self.state = "standing"
                 print("You got 21! You stand with maximum points")
@@ -128,7 +138,7 @@ class Dealer(Player):  # Dealer will play automatically depending on its hand
             if self.hand_value < 17:
                 print("The dealer gets a card")
                 self.get_card()
-            elif 17 <= hand_value <= 21:
+            elif 17 <= self.hand_value <= 21:
                 print("The dealer stands with {} points".format(self.hand_value))
                 self.state = "standing"
             else:  # hand_value > 21
