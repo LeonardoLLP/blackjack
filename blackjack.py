@@ -17,14 +17,14 @@ cards = {
     chr(0x1F0AE): 10,
 }
 
-def create_deck():
+def create_deck(length=1):  # Length represents the number of individual decks that form the big deck.
     _deck = []
-    i = 0
-    for card, value in cards.items():
-        _deck.append((card, "hearts", value))
-        _deck.append((card, "spades", value))
-        _deck.append((card, "club", value))
-        _deck.append((card, "diamonds", value))
+    for i in range(length)
+        for card, value in cards.items():
+            _deck.append((card, "hearts", value))
+            _deck.append((card, "spades", value))
+            _deck.append((card, "club", value))
+            _deck.append((card, "diamonds", value))
 
     # Randomize the deck
     _random_deck = []
@@ -156,18 +156,15 @@ p1 = Visitor(2000)
 ### Start hand
 
 p1.get_card()
-p1.get_card()
-
-dealer.get_card()
-dealer.get_card()  # Every card can be uncovered
-
-print()
-print(dealer.hand)
-print(p1.hand)  # TODO: remove after tests
-print()
+dealer.get_card()# Every card can be uncovered
 
 p1.play_hand()
-dealer.play_hand()
+if p1.state == "standing":
+    dealer.play_hand()
+
+
 
 print(p1.get_hand_value())
 print(dealer.get_hand_value())
+
+# You should be able to see the dealer hand, as it is uncovered
