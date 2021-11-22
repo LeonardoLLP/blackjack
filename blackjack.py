@@ -110,10 +110,21 @@ class Visitor(Player):
                 self.state = "busted"
             elif self.get_hand_value() == 21:
                 self.state = "standing"
+                print("You got 21! You stand with maximum points")
 
 
-class Dealer(Player):
-    pass  # Continue here
+class Dealer(Player):  # Dealer will play automatically depending on its hand
+    def play_hand(self):
+        while self.state == "on play":
+
+            hand_value = self.get_hand_value()
+
+            if hand_value < 17:
+                self.get_card()
+            elif 17 <= hand_value <= 21:
+                self.state = "standing"
+            else:  # hand_value > 21
+                self.state = "busted"
 
 
 
