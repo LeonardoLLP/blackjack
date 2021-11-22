@@ -67,7 +67,7 @@ class Player:
 
 
     def play_hand(self):
-        while self.state == "on play":
+        while self.state == "playing":
             option = input('Choose your action (type "help" for a list of actions): ')  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
 
             if option == "hit":
@@ -91,7 +91,8 @@ class Player:
 
 class Visitor(Player):
     def play_hand(self):
-        while self.state == "on play":
+        self.state = "playing"
+        while self.state == "playing":
             option = input('Choose your action (type "help" for a list of actions): ')  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
 
             if option == "hit":
@@ -115,7 +116,8 @@ class Visitor(Player):
 
 class Dealer(Player):  # Dealer will play automatically depending on its hand
     def play_hand(self):
-        while self.state == "on play":
+        self.state = "playing"
+        while self.state == "playing":
 
             hand_value = self.get_hand_value()
 
@@ -146,5 +148,5 @@ print(dealer.hand)
 print(p1.hand)  # TODO: remove after tests
 print()
 
-p1.state = "on play"
+
 
