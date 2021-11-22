@@ -49,8 +49,6 @@ class Player:
         self.hand = []  # Cards in the hand
         self.state = "waiting"
 
-
-
     hand = []  # Cards in the hand
 
     def get_hand_value(self):
@@ -88,6 +86,36 @@ class Player:
                 self.state = "busted"
             elif self.get_hand_value() == 21:
                 self.state = "standing"
+
+
+
+class Visitor(Player):
+    def play_hand(self):
+        while self.state == "on play":
+            option = input('Choose your action (type "help" for a list of actions): ')  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
+
+            if option == "hit":
+                pass
+            elif option == "see my hand":
+                pass
+            elif option == "stand":
+                self.state = "standing"
+            else:
+                print("The dealer didn't understand you.")
+                sleep(0.75)
+                print('(Type "help" to get a list of comands)')
+                sleep(0.75)
+
+            if self.get_hand_value() > 21:
+                self.state = "busted"
+            elif self.get_hand_value() == 21:
+                self.state = "standing"
+
+
+class Dealer(Player):
+    pass  # Continue here
+
+
 
 
 # TODO: Change location of this
