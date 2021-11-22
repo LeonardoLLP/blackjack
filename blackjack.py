@@ -47,8 +47,9 @@ class Player:
     def __init__(self, money):
         self.money = float(money)
         self.hand = []  # Cards in the hand
+        self.state = "waiting"
 
-    state = "waiting"
+
 
     hand = []  # Cards in the hand
 
@@ -67,6 +68,28 @@ class Player:
         self.hand = []
 
 
+    def play_hand(self):
+        while self.state == "on play":
+            option = input('Choose your action (type "help" for a list of actions): ')  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
+
+            if option == "hit":
+                pass
+            elif option == "see my hand":
+                pass
+            elif option == "stand":
+                self.state = "standing"
+            else:
+                print("The dealer didn't understand you.")
+                sleep(0.75)
+                print('(Type "help" to get a list of comands)')
+                sleep(0.75)
+
+            if self.get_hand_value() > 21:
+                self.state = "busted"
+            elif self.get_hand_value() == 21:
+                self.state = "standing"
+
+
 # TODO: Change location of this
 dealer = Player(100000)
 p1 = Player(2000)
@@ -82,25 +105,7 @@ dealer.get_card()  # Every card can be uncovered
 print()
 print(dealer.hand)
 print(p1.hand)  # TODO: remove after tests
+print()
 
 p1.state = "on play"
-while p1.state == "on play":
-    option = input('Choose your action (type "help" for a list of actions): ')  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
-
-    if option == "hit":
-        pass
-    elif option == "see my hand":
-        pass
-    elif option == "stand":
-        p1.state = "standing"
-    else:
-        print("The dealer didn't understand you.")
-        sleep(0.75)
-        print('(Type "help" to get a list of comands)')
-        sleep(0.75)
-
-    if p1.get_hand_value() > 21:
-        p1.state = "busted"
-    elif p1.get_hand_value() == 21:
-        p1.state = "standing"
 
