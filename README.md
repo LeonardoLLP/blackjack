@@ -7,7 +7,7 @@ El programa mostrado empieza creando una baraja vací e instanciando un "Dealer"
 
 
 El código del que hablamos se muestra a continuación:
-'''
+```
 import random as rd
 from time import sleep
 
@@ -255,5 +255,5 @@ while playing:
         else:
             print("Please select one of the options\r")
             sleep(3)
-'''
+```
 
