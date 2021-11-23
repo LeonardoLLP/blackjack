@@ -106,6 +106,7 @@ class Visitor(Player):
         option_help = True
         while self.state == "playing":
             if option_help == True:
+                option_help = False
                 print("Choose your action between:")
                 sleep(1.5)
                 print("hit: take another card.")
@@ -160,9 +161,13 @@ class Visitor(Player):
                 self.state = "standing"
                 print("You got 21! You stand with maximum points")
 
+            sleep(3)
+
 
 class Dealer(Player):  # Dealer will play automatically depending on its hand
     def play_hand(self):
+        print("It is the dealer's turn.")
+        sleep(2)
         self.state = "playing"
         while self.state == "playing":
 
@@ -191,6 +196,9 @@ p1 = Visitor(0)
 ### Plays a whole round
 def play_round():
 
+    p1.empty_hand()
+    dealer.empty_hand()
+
     p1.get_card()
     p1.get_card()
     dealer.get_card()
@@ -218,11 +226,15 @@ while playing:
     else:  # dealer.state == "busted"
         print("You won the hand! Want to play another one?")
 
+    sleep(2)
+
     while True:
         want_to_play = input('(Type "yes" to play another round, or "no" to stop playing): ')
         if want_to_play == "yes":
             break
         elif want_to_play == "no":
+            sleep("See you soon!")
+            sleep(2)
             playing = False
             break
         else:
