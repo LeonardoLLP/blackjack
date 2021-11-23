@@ -96,15 +96,27 @@ class Player:
 
 class Visitor(Player):
     def play_hand(self):
+        print("It's your turn.")
+        sleep(2)
+        print("Your hand is")
+        print(self.print_hand(self))
+        sleep(2)
+
         self.state = "playing"
         option_help = True
         while self.state == "playing":
             if option_help == True:
-                option = input("""Choose your action between:
-                hit
-                see my hand
-                see dealer hand
-                stand""").casefold()
+                print("Choose your action between:")
+                sleep(1.5)
+                print("hit: take another card.")
+                sleep(1.5)
+                print("see my hand: see a list of the cards in your hand.")
+                sleep(1.5)
+                print("see dealer hand: see uncovered dealer's card.")
+                sleep(1.5)
+                print("stand: pass the game to the dealer.")
+                sleep(1.5)
+                option = input("What do you choose? ").casefold()
             else:
                 option = input("Choose your option: ")
 
@@ -130,6 +142,7 @@ class Visitor(Player):
 
             elif option == "help":
                 option_help = True
+                continue
 
             else:
                 print("The dealer didn't understand you.")
