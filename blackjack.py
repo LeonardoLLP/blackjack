@@ -156,12 +156,12 @@ class Visitor(Player):
             if self.get_hand_value() > 21:
                 self.state = "busted"
                 print("You went bust (over 21)")
+                sleep(2)
 
             elif self.get_hand_value() == 21:
                 self.state = "standing"
                 print("You got 21! You stand with maximum points")
-
-            sleep(3)
+                sleep(2)
 
 
 class Dealer(Player):  # Dealer will play automatically depending on its hand
@@ -231,12 +231,17 @@ while playing:
     while True:
         want_to_play = input('(Type "yes" to play another round, or "no" to stop playing): ')
         if want_to_play == "yes":
+            print()
+            print("Preparing the new hand ...")
+            sleep(1)
             break
+
         elif want_to_play == "no":
             sleep("See you soon!")
             sleep(2)
             playing = False
             break
+
         else:
             print("Please select one of the options\r")
             sleep(3)
