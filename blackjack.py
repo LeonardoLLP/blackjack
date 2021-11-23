@@ -26,6 +26,13 @@ def create_deck(length=1):  # Length represents the number of individual decks t
             _deck.append((card, "club", value))
             _deck.append((card, "diamonds", value))
 
+    print("Shuffling the deck ", end="")
+    for i in range(3):
+        sleep(1.5)
+        print(".", end="")
+    print()
+    sleep(2.5)
+
     # Randomize the deck
     _random_deck = []
     for i in range(len(_deck)):
@@ -33,13 +40,15 @@ def create_deck(length=1):  # Length represents the number of individual decks t
             0, len(_deck) - 1
         )  # Need to subtract 1 because of list indexing
         _random_deck.append(_deck.pop(card_index))
+
+    print("Deck shuffled")
     return _random_deck
+
+
 
 # Obtener valor de carta
 def card_value(_card):
     return _card[0][2]
-
-deck = None
 
 class Player:
     def __init__(self, money):
@@ -150,12 +159,12 @@ class Dealer(Player):  # Dealer will play automatically depending on its hand
 
             sleep(2)
 
+deck = []
 dealer = Dealer(0)
 p1 = Visitor(0)
 
 ### Plays a whole round
 def play_round():
-    deck = create_deck()
 
     p1.get_card()
     p1.get_card()
@@ -168,6 +177,7 @@ def play_round():
 
 playing = True
 while playing:
+    deck = create_deck()
     play_round()
 
     if p1.state == "busted":
