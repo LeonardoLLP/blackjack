@@ -166,14 +166,26 @@ def play_round():
     if p1.state == "standing":
         dealer.play_hand()
 
-if p1.state == "busted":
-    print("You lost your bet. Want to try again?")
-elif p1.state == "standing" and dealer.state == "standing":
-    if p1.get_hand_value() > dealer.get_hand_value():
-        print("You won the hand! Want to play another one?")
-    else:  # Your score is under the dealer one or equal
-        print("Your score didn't surpass the dealer's one. Want to try again?")
-else:  # dealer.state == "busted"
-    print("You won the hand! Want to play another one?")
+playing = True
+while playing:
+    play_round()
 
-want_to_play = input()
+    if p1.state == "busted":
+        print("You lost your bet. Want to try again?")
+    elif p1.state == "standing" and dealer.state == "standing":
+        if p1.get_hand_value() > dealer.get_hand_value():
+            print("You won the hand! Want to play another one?")
+        else:  # Your score is under the dealer one or equal
+            print("Your score didn't surpass the dealer's one. Want to try again?")
+    else:  # dealer.state == "busted"
+        print("You won the hand! Want to play another one?")
+
+    while True:
+        want_to_play = input('(Type "yes" to play another round, or "no" to stop playing)')
+        if want_to_play == "yes":
+            break
+        elif want_to_play == "no":
+            playing = False
+            break
+        else:
+            print("Please select one of the options")
