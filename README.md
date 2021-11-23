@@ -2,11 +2,20 @@
 
 Dirección del repositorio: [blackjack.git](https://github.com/LeonardoLLP/blackjack)
 
-El programa mostrado empieza creando una baraja vací e instanciando un "Dealer" (el crupier) y un "Visitor" (el jugador), cuyas clases son todas 
+El programa mostrado empieza creando una baraja vacía e instanciando un "Dealer" (el crupier) y un "Visitor" (el jugador), cuyas clases son todas derivadas de Player. A continuación, el jugador procede a coger dos cartas y el crupier igual, solo que este deja una carta cubierta que no puede ver el jugador. El jugador puede elegir entre diversas acciones como coger otra carta, ver su mano o ver la del crupier (aunque una de sus cartas está cubierta). Aunque si decide coger carta y se pasa de 21, perderá el juego. Una vez haya elegido "plantarse", procederá el crupier de forma automatizada. Una vez este acabe, si se pasó de 21, el jugador ganará automaticamente. En cambio, si ninguno se pasa, habrá que ver si el jugador obtuvo mayor puntuación que el crupier. Si es así, el jugador gana. En caso contrario, pierde. Por último, el jugador podrá elegir si jugar otra mano o no. En caso de que elija que sí, se empezará otra ronda con una baraja nueva. En caso contrario, el código terminará.
 
 
+El diagrama de clases es el siguiente:
+<br>
+<img height="500" src="https://github.com/LeonardoLLP/blackjack/blob/main/blackjack_classDiagram.png" />
+<br>
 
-El código del que hablamos se muestra a continuación:
+Por otro lado, el diagrama de flujo es el siguiente:
+<br>
+<img height="2000" src="https://github.com/LeonardoLLP/blackjack/blob/main/blackjack_flowchart.png" />
+<br>
+
+El código del programa se muestra a continuación:
 ```
 import random as rd
 from time import sleep
