@@ -35,12 +35,11 @@ def create_deck(length=1):  # Length represents the number of individual decks t
         _random_deck.append(_deck.pop(card_index))
     return _random_deck
 
+# Obtener valor de carta
 def card_value(_card):
     return _card[2]
 
 deck = None
-
-# Obtener valor de carta
 
 class Player:
     def __init__(self, money):
@@ -59,9 +58,9 @@ class Player:
     def get_card(self, see_card=False, covered=False):
         self.new_card = deck.pop()
         if covered == True:
-            self.new_card.append("covered")
+            self.new_card = (self.new_card, "covered")
         else:
-            self.new_card.append("uncovered")
+            self.new_card = (self.new_card, "uncovered")
 
         self.hand.append(
             self.new_card
@@ -87,21 +86,24 @@ class Visitor(Player):
                 print("Your hand is now")
                 print(self.hand)
 
-            elif option == "see my hand":
-                print("Your hand is")
-                print(self.hand)
-
             elif option == "stand":
                 self.state = "standing"
                 print()
 
+            elif option == "see my hand":
+                print("Your hand is")
+                my_hand = []
+                for card in self.hand:
+                    my_hand.append(card[0])
+                print(my_hand)
+
             elif option == "see dealer hand":
                 dealer_hand = []
                 for card in dealer.hand:
-                    if card[3] == "covered":
+                    if card[1] == "covered":
                         dealer_hand.append("covered card")
                     else:
-                        dealer_hand.append(card)
+                        dealer_hand.append(card[0])
                 return dealer_hand
 
             else:
