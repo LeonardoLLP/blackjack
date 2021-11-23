@@ -37,7 +37,7 @@ def create_deck(length=1):  # Length represents the number of individual decks t
 
 # Obtener valor de carta
 def card_value(_card):
-    return _card[2]
+    return _card[0][2]
 
 deck = None
 
