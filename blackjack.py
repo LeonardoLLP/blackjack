@@ -66,10 +66,22 @@ class Player:
             self.new_card
         )
         if see_card == True:
-            return self.new_card
+            return self.new_card[0]
 
     def empty_hand(self):
         self.hand = []
+
+    def print_hand(player, is_self=True):
+        player_hand = []
+        for card in player.hand:
+            if is_self == True:
+                player_hand.append(card[0])
+            elif card[1] == "covered":
+                player_hand.append("covered card")
+            else:
+                player_hand.append(card[0])
+
+        return player_hand
 
 
 class Visitor(Player):
@@ -84,38 +96,32 @@ class Visitor(Player):
                 print(self.get_card(see_card=True))
                 sleep(2)
                 print("Your hand is now")
-                print(self.hand)
+                print(self.print_hand(self))
 
             elif option == "stand":
                 self.state = "standing"
-                print()
+                print("You are now standing with ")
 
             elif option == "see my hand":
                 print("Your hand is")
-                my_hand = []
-                for card in self.hand:
-                    my_hand.append(card[0])
-                print(my_hand)
+                print(self.print_hand(self))
 
             elif option == "see dealer hand":
-                dealer_hand = []
-                for card in dealer.hand:
-                    if card[1] == "covered":
-                        dealer_hand.append("covered card")
-                    else:
-                        dealer_hand.append(card[0])
-                return dealer_hand
+                print("The dealer's hand is")
+                print(self.print_hand(dealer))
 
             else:
                 print("The dealer didn't understand you.")
                 sleep(2)
                 print('(Type "help" to get a list of comands)')
+
             sleep(2)
 
 
             if self.get_hand_value() > 21:
                 self.state = "busted"
                 print("You went bust (over 21) and lost your money. Better luck next time!")
+
             elif self.get_hand_value() == 21:
                 self.state = "standing"
                 print("You got 21! You stand with maximum points")
