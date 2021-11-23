@@ -35,13 +35,12 @@ def create_deck(length=1):  # Length represents the number of individual decks t
         _random_deck.append(_deck.pop(card_index))
     return _random_deck
 
-
-deck = create_deck()
-print(deck)  # TODO: Remove after tests
-
-# Obtener valor de carta
 def card_value(_card):
     return _card[2]
+
+deck = None
+
+# Obtener valor de carta
 
 class Player:
     def __init__(self, money):
@@ -57,8 +56,13 @@ class Player:
             points += card_value(card)
         return points
 
-    def get_card(self, see_card=False):
+    def get_card(self, see_card=False, covered=False):
         self.new_card = deck.pop()
+        if covered == True:
+            self.new_card.append("covered")
+        else:
+            self.new_card.append("uncovered")
+
         self.hand.append(
             self.new_card
         )
@@ -67,29 +71,6 @@ class Player:
 
     def empty_hand(self):
         self.hand = []
-
-
-    def play_hand(self):
-        while self.state == "playing":
-            option = input('Choose your action (type "help" for a list of actions): ')  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
-
-            if option == "hit":
-                pass
-            elif option == "see my hand":
-                pass
-            elif option == "stand":
-                self.state = "standing"
-            else:
-                print("The dealer didn't understand you.")
-                sleep(0.75)
-                print('(Type "help" to get a list of comands)')
-                sleep(0.75)
-
-            if self.get_hand_value() > 21:
-                self.state = "busted"
-            elif self.get_hand_value() == 21:
-                self.state = "standing"
-
 
 
 class Visitor(Player):
@@ -105,17 +86,30 @@ class Visitor(Player):
                 sleep(2)
                 print("Your hand is now")
                 print(self.hand)
+
             elif option == "see my hand":
                 print("Your hand is")
                 print(self.hand)
+
             elif option == "stand":
                 self.state = "standing"
                 print()
+
+            elif option == "see dealer hand":
+                dealer_hand = []
+                for card in dealer.hand:
+                    if card[3] == "covered":
+                        dealer_hand.append("covered card")
+                    else:
+                        dealer_hand.append(card)
+                return dealer_hand
+
             else:
                 print("The dealer didn't understand you.")
                 sleep(2)
                 print('(Type "help" to get a list of comands)')
             sleep(2)
+
 
             if self.get_hand_value() > 21:
                 self.state = "busted"
@@ -132,39 +126,41 @@ class Dealer(Player):  # Dealer will play automatically depending on its hand
 
             self.hand_value = self.get_hand_value()
             print("The dealer has {} points in his hand".format(self.hand_value))
-
             sleep(2)
 
             if self.hand_value < 17:
                 print("The dealer gets a card")
                 self.get_card()
+
             elif 17 <= self.hand_value <= 21:
                 print("The dealer stands with {} points".format(self.hand_value))
                 self.state = "standing"
+
             else:  # hand_value > 21
                 print("The dealer went bust")
                 self.state = "busted"
+
             sleep(2)
 
 
 
 
-# TODO: Change location of this
+
 dealer = Dealer(100000)
 p1 = Visitor(2000)
 
 
 ### Start hand
+deck = create_deck()
+
 p1.get_card()
-dealer.get_card()# Every card can be uncovered
+p1.get_card()
+dealer.get_card()
+dealer.get_card(covered=True)
 
 p1.play_hand()
 if p1.state == "standing":
     dealer.play_hand()
 
-
-
-print(p1.get_hand_value())
-print(dealer.get_hand_value())
 
 # You should be able to see only ONE card from the dealer. Add property to card, to be uncovered or covered. Function property
