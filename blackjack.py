@@ -71,7 +71,7 @@ class Player:
     def empty_hand(self):
         self.hand = []
 
-    def print_hand(player, is_self=True):
+    def print_hand(self, player, is_self=False):
         player_hand = []
         for card in player.hand:
             if is_self == True:
@@ -100,13 +100,13 @@ class Visitor(Player):
 
             elif option == "stand":
                 self.state = "standing"
-                print("You are now standing with ")
+                print("You are now standing with {} points".format(self.get_hand_value()))
 
             elif option == "see my hand":
                 print("Your hand is")
                 print(self.print_hand(self))
 
-            elif option == "see dealer hand":
+            elif option == "see dealer's hand":
                 print("The dealer's hand is")
                 print(self.print_hand(dealer))
 
