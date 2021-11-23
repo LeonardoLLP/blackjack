@@ -120,7 +120,7 @@ class Visitor(Player):
 
             if self.get_hand_value() > 21:
                 self.state = "busted"
-                print("You went bust (over 21) and lost your money. Better luck next time!")
+                print("You went bust (over 21)")
 
             elif self.get_hand_value() == 21:
                 self.state = "standing"
@@ -150,25 +150,30 @@ class Dealer(Player):  # Dealer will play automatically depending on its hand
 
             sleep(2)
 
+dealer = Dealer(0)
+p1 = Visitor(0)
 
+### Plays a whole round
+def play_round():
+    deck = create_deck()
 
+    p1.get_card()
+    p1.get_card()
+    dealer.get_card()
+    dealer.get_card(covered=True)
 
+    p1.play_hand()
+    if p1.state == "standing":
+        dealer.play_hand()
 
-dealer = Dealer(100000)
-p1 = Visitor(2000)
+if p1.state == "busted":
+    print("You lost your bet. Want to try again?")
+elif p1.state == "standing" and dealer.state == "standing":
+    if p1.get_hand_value() > dealer.get_hand_value():
+        print("You won the hand! Want to play another one?")
+    else:  # Your score is under the dealer one or equal
+        print("Your score didn't surpass the dealer's one. Want to try again?")
+else:  # dealer.state == "busted"
+    print("You won the hand! Want to play another one?")
 
-
-### Start hand
-deck = create_deck()
-
-p1.get_card()
-p1.get_card()
-dealer.get_card()
-dealer.get_card(covered=True)
-
-p1.play_hand()
-if p1.state == "standing":
-    dealer.play_hand()
-
-
-# You should be able to see only ONE card from the dealer. Add property to card, to be uncovered or covered. Function property
+want_to_play = input()
