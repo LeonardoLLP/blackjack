@@ -42,6 +42,7 @@ def create_deck(length=1):  # Length represents the number of individual decks t
         _random_deck.append(_deck.pop(card_index))
 
     print("Deck shuffled")
+    sleep(2)
     return _random_deck
 
 
@@ -96,8 +97,16 @@ class Player:
 class Visitor(Player):
     def play_hand(self):
         self.state = "playing"
+        option_help = True
         while self.state == "playing":
-            option = input('Choose your action (type "help" for a list of actions): ').casefold()  # TODO: El parentesis va a ser muy repetitivo. Planear un tutorial al inicio con las acciones disponibles. Usar \r para reescribir
+            if option_help == True:
+                option = input("""Choose your action between:
+                hit
+                see my hand
+                see dealer hand
+                stand""").casefold()
+            else:
+                option = input("Choose your option: ")
 
             if option == "hit":
                 print("You get a card")
@@ -115,14 +124,17 @@ class Visitor(Player):
                 print("Your hand is")
                 print(self.print_hand(self))
 
-            elif option == "see dealer's hand":
+            elif option == "see dealer hand":
                 print("The dealer's hand is")
                 print(self.print_hand(dealer))
+
+            elif option == "help":
+                option_help = True
 
             else:
                 print("The dealer didn't understand you.")
                 sleep(2)
-                print('(Type "help" to get a list of comands)')
+                print('(Type "help" to see again the list of commands)')
 
             sleep(2)
 
@@ -175,6 +187,9 @@ def play_round():
     if p1.state == "standing":
         dealer.play_hand()
 
+
+
+### Actual game
 playing = True
 while playing:
     deck = create_deck()
@@ -191,11 +206,12 @@ while playing:
         print("You won the hand! Want to play another one?")
 
     while True:
-        want_to_play = input('(Type "yes" to play another round, or "no" to stop playing)')
+        want_to_play = input('(Type "yes" to play another round, or "no" to stop playing): ')
         if want_to_play == "yes":
             break
         elif want_to_play == "no":
             playing = False
             break
         else:
-            print("Please select one of the options")
+            print("Please select one of the options\r")
+            sleep(3)
