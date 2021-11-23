@@ -6,14 +6,19 @@ El programa mostrado empieza creando una baraja vacía e instanciando un "Dealer
 
 
 El diagrama de clases es el siguiente:
+
 <br>
 <img height="500" src="https://github.com/LeonardoLLP/blackjack/blob/main/blackjack_classDiagram.png" />
 <br>
+
+
 
 Por otro lado, el diagrama de flujo es el siguiente:
 <br>
 <img height="2000" src="https://github.com/LeonardoLLP/blackjack/blob/main/blackjack_flowchart.png" />
 <br>
+
+
 
 El código del programa se muestra a continuación:
 ```
