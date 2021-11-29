@@ -21,7 +21,7 @@ Por otro lado, el diagrama de flujo es el siguiente:
 
 
 El código del programa se muestra a continuación:
-```
+```python
 import random as rd
 from time import sleep
 
